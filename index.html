@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elegant Registration Page</title>
+
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Tailwind CSS Configuration for custom design tokens
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'imperial-void': '#020617',
+            'surface': 'rgba(255,255,255,0.03)',
+            'primary-indigo': {
+              DEFAULT: '#6366f1',
+              hover: '#818cf8',
+            },
+            'accent-blue': {
+              DEFAULT: '#3b82f6',
+              hover: '#60a5fa',
+            },
+            'success': '#10b981',
+            'danger': '#ef4444',
+            'slate-100': '#f1f5f9',
+            'slate-500': '#64748b',
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          borderRadius: {
+            'card': '1rem',    // For cards/main containers
+            'button': '0.75rem', // For buttons
+            'input': '0.5rem',   // For input fields
+          },
+          boxShadow: {
+            'glow': '0 0 40px rgba(99,102,241,0.15)',
+          },
+          keyframes: {
+            blob: {
+              '0%, 100%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+            },
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            inputFocus: {
+              '0%': { transform: 'scaleX(0)' },
+              '100%': { transform: 'scaleX(1)' },
+            }
+          },
+          animation: {
+            blob: 'blob 7s infinite cubic-bezier(0.6, 0.01, 0.3, 1)',
+            fadeInUp: 'fadeInUp 0.8s ease-out forwards',
+            inputFocus: 'inputFocus 0.3s ease-out forwards',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-imperial-void text-slate-100 font-inter min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+
+  <!-- Decorative Background Elements for visual depth and animation -->
+  <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
+    <div class="absolute w-72 h-72 bg-primary-indigo-hover rounded-full mix-blend-multiply filter blur-2xl opacity-15 animate-blob top-1/4 left-1/4"></div>
+    <div class="absolute w-80 h-80 bg-accent-blue-hover rounded-full mix-blend-multiply filter blur-2xl opacity-15 animate-blob animation-delay-2000 top-1/2 right-1/4"></div>
+    <div class="absolute w-64 h-64 bg-primary-indigo-hover rounded-full mix-blend-multiply filter blur-2xl opacity-15 animate-blob animation-delay-4000 bottom-1/4 left-1/2"></div>
+  </div>
+
+  <main class="page-entry-animation container max-w-md w-full p-8 rounded-card shadow-glow glass-effect relative z-10">
+    <header class="text-center mb-8">
+      <h1 class="text-4xl font-extrabold text-slate-100 leading-tight mb-2">
+        تسجيل الدخول
+      </h1>
+      <p class="text-slate-500 text-lg">
+        انضم إلينا اليوم لتبدأ رحلتك
+      </p>
+    </header>
+
+    <form id="registrationForm" class="space-y-6">
+      <!-- Email Input Group -->
+      <div class="input-group relative">
+        <label for="email" class="block text-slate-100 text-sm font-medium mb-2 cursor-pointer">
+          البريد الإلكتروني
+        </label>
+        <div class="relative">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="w-full p-3 pr-10 rounded-input border border-transparent focus:border-primary-indigo-DEFAULT bg-surface text-slate-100 placeholder-slate-500 focus:outline-none transition-all duration-300 input-field-base"
+            placeholder="ادخل بريدك الإلكتروني"
+            required
+            aria-label="البريد الإلكتروني"
+            autocomplete="email"
+          >
+          <i data-lucide="mail" class="lucide-icon absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none transition-colors duration-300"></i>
+          <div class="input-focus-line"></div>
+        </div>
+        <p id="emailError" class="text-danger text-sm mt-2 hidden" aria-live="polite"></p>
+      </div>
+
+      <!-- Password Input Group -->
+      <div class="input-group relative">
+        <label for="password" class="block text-slate-100 text-sm font-medium mb-2 cursor-pointer">
+          كلمة المرور
+        </label>
+        <div class="relative">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="w-full p-3 pr-10 rounded-input border border-transparent focus:border-primary-indigo-DEFAULT bg-surface text-slate-100 placeholder-slate-500 focus:outline-none transition-all duration-300 input-field-base"
+            placeholder="ادخل كلمة المرور"
+            required
+            aria-label="كلمة المرور"
+            autocomplete="new-password"
+          >
+          <i data-lucide="lock" class="lucide-icon absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none transition-colors duration-300"></i>
+          <div class="input-focus-line"></div>
+        </div>
+        <p id="passwordError" class="text-danger text-sm mt-2 hidden" aria-live="polite"></p>
+      </div>
+
+      <!-- Confirm Password Input Group -->
+      <div class="input-group relative">
+        <label for="confirmPassword" class="block text-slate-100 text-sm font-medium mb-2 cursor-pointer">
+          تأكيد كلمة المرور
+        </label>
+        <div class="relative">
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            class="w-full p-3 pr-10 rounded-input border border-transparent focus:border-primary-indigo-DEFAULT bg-surface text-slate-100 placeholder-slate-500 focus:outline-none transition-all duration-300 input-field-base"
+            placeholder="أكد كلمة المرور"
+            required
+            aria-label="تأكيد كلمة المرور"
+            autocomplete="new-password"
+          >
+          <i data-lucide="check-circle" class="lucide-icon absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none transition-colors duration-300"></i>
+          <div class="input-focus-line"></div>
+        </div>
+        <p id="confirmPasswordError" class="text-danger text-sm mt-2 hidden" aria-live="polite"></p>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="w-full py-3 px-4 rounded-button bg-primary-indigo-DEFAULT hover:bg-primary-indigo-hover text-white font-semibold text-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-indigo-DEFAULT focus:ring-offset-2 focus:ring-offset-imperial-void button-glow-on-hover"
+        aria-label="تسجيل الدخول"
+      >
+        تسجيل الدخول
+      </button>
+    </form>
+
+    <footer class="text-center mt-8 text-slate-500 text-sm">
+      <p>
+        بالنقر على "تسجيل الدخول"، فإنك توافق على
+        <a href="#" class="text-primary-indigo-DEFAULT hover:underline transition-colors duration-300">شروط الخدمة</a>
+        و
+        <a href="#" class="text-primary-indigo-DEFAULT hover:underline transition-colors duration-300">سياسة الخصوصية</a>.
+      </p>
+    </footer>
+  </main>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+
+  <!-- Custom JavaScript -->
+  <script src="app.js" defer></script>
+</body>
+</html>
